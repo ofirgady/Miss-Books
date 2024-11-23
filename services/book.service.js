@@ -48,8 +48,8 @@ function save(book) {
     }
 }
 
-function getEmptyBook(title = '', listPrice = {}) {
-    return { title, listPrice }
+function getEmptyBook(title = '', description = '', thumbnail = '', listPrice = {}) {
+    return { title, description, thumbnail , listPrice }
 }
 
 function getDefaultFilter(filterBy = { txt: '', price: 1000 }) {
@@ -60,17 +60,22 @@ function _createBooks() {
     let books = utilService.loadFromStorage(BOOK_KEY)
     if (!books || !books.length) {
         books = []
-        const titles = ['The Maze Runner', 'Harry Potter', '7']
-        const listPrices = [ {amount: 109, currencyCode: "EUR", isOnSale: false} , {amount: 12, currencyCode: "EUR", isOnSale: true} , {amount: 302, currencyCode: "NIS", isOnSale: false}]
+        const titles = ['Gwent', 'Between here and gone', 'Magic latern']
+        const listPrices = [ {amount: 59, currencyCode: "EUR", isOnSale: false} , {amount: 102, currencyCode: "EUR", isOnSale: true} , {amount: 72, currencyCode: "NIS", isOnSale: false}]
         for (let i = 0; i < 3; i++) {
-            books.push(_createBook(titles[i], listPrices[i]))
+            books.push(_createBook(
+                titles[i], 
+                utilService.makeLorem(20), 
+                `../assets/img/${i+1}.jpg`, 
+                listPrices[i]
+            ))
         }
         utilService.saveToStorage(BOOK_KEY, books)
     }
 }
 
-function _createBook(title, listPrice) {
-    const book = getEmptyBook(title, listPrice)
+function _createBook(title, description, thumbnail, listPrice) {
+    const book = getEmptyBook(title,description,thumbnail, listPrice)
     book.id = utilService.makeId()
     return book
 }
