@@ -1,9 +1,9 @@
 const { useState, useEffect, useRef } = React
 
-export function Home() {
+export function AboutUs() {
     return (
         <section className="home">
-            <h2>Home Sweet Home</h2>
+            <h2>About Us</h2>
        </section>
     )
 }

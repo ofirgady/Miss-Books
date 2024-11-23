@@ -1,6 +1,6 @@
 const { useState, useEffect, useRef } = React
 
-export function Home() {
+export function BookFilter() {
     return (
         <section className="home">
             <h2>Home Sweet Home</h2>
