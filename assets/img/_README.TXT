@@ -1,2 +1,2 @@
 Uploaded to
-coding-academy.org/books-photos
+coding-academy.org/book-photos

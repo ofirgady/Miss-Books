@@ -213,12 +213,65 @@ a.active {
 	}
 }
 
+.book-preview-container {
+	background-color: rgb(223, 254, 245);
+	margin: 1rem;
+	/* max-width: 500px; */
+}
 
 .book-preview {
-	background-color: rgb(223, 254, 245);
 	display: flex;
-	max-height: 500px;
+	width: auto;
 	gap: 1rem;
-	margin: 1rem;
 	padding: 1rem;
+	justify-content: space-between;
+}
+
+.book-preview img {
+	max-width: 200px;
+}
+
+.book-preview-footer {
+	display: flex;
+	align-items: center;
+	justify-content: space-around;
+	padding: 1rem;
+}
+
+.book-filter {
+	background-color: rgb(254, 169, 169);
+	padding: 1rem;
+	padding-top: 0.2rem;
+}
+
+.book-filter-form {
+	display: flex;
+	gap: 1rem;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.book-filter-form label {
+	margin-right: 1rem;
+}
+
+.book-filter-form button {
+	height: 100%;
+}
+
+.book-details {
+	display: flex;
+	flex-direction: column;
+	gap: 1rem;
+	max-width: 600px;
+}
+
+.book-details img {
+	width: 300px;
+	align-self: center;
+}
+
+.book-details .buttons {
+	display: flex;
+	align-self: center;
 }
