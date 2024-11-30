@@ -45,13 +45,14 @@ export function BookFilter({defaultFilter, onSetFilter}) {
     return (
         <section className="book-filter">
             <h2>Filter Our Books</h2>
+            <br />
             <form onSubmit={onSubmitFilter} className="book-filter-form">
-                <div>
+                <div className="filter-input">
                     <label htmlFor="title">Book's name</label>
                     <input value={title} onChange={handleChange} type="text" name="title" id="title" />
                 </div>
 
-                <div>
+                <div className="filter-input">
                     <label htmlFor="price">Max Price</label>
                     <input min="0" max="1000" value={tempPrice} onChange={handleChange} type="range" name="price" id="price" />
                     <span>{price}</span>

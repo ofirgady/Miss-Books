@@ -1,7 +1,6 @@
 import { bookService } from "../services/book.service.js";
-import { BookDetails } from "./BookDetails.jsx";
-import { BookFilter } from "./BookFilter.jsx";
-import { BookList } from "./bookList.jsx";
+import { BookFilter } from "../cmps/BookFilter.jsx";
+import { BookList } from "../cmps/bookList.jsx";
 const { useState, useEffect, useRef} = React
 const { useParams, useNavigate, Link } = ReactRouterDOM
 
@@ -35,21 +34,28 @@ export function BookIndex() {
         setFilterBy(prevFilter => ({...prevFilter, ...filterBy }))
     }
 
-    if (!books) return <div>Loading...</div>
+    if (!books) return (
+        <div className="loading-container">
+            <div className="loading"></div>
+        </div>
+    )
     return (
-        <section className="book-index">
+        <section className="book-index-container">
                 <h2>Books</h2>
-                    <section >
-                        <BookFilter onSetFilter={onSetFilter} defaultFilter={filterBy}/>
-                        <button><Link to="/book/edit">Add</Link></button>
+                <section className="book-index">
+                    <BookFilter onSetFilter={onSetFilter} defaultFilter={filterBy}/>
+                    <div className="add-book-button">
+                    <h3>You have another book to add?</h3>
+                    <button><Link to="/book/edit">Click Here!</Link></button>
+                    </div>
 
-                        {!books.length && <div>No books found...</div>}
+                    {!books.length && <div>No books found...</div>}
 
-                        <div className="book-list-container">
-                            <BookList books={books} onRemoveBook={onRemoveBook} />
-                        </div>
+                    <div className="book-list-container">
+                        <BookList books={books} onRemoveBook={onRemoveBook} />
+                    </div>
 
-                    </section>
+                </section>
         </section>
     )
 }

@@ -508,7 +508,10 @@ function getDefaultFilter(filterBy = { title: '', price: 1000 }) {
 function _createBooks() {
     let storagedBooks = utilService.loadFromStorage(BOOK_KEY)
     if (!storagedBooks || !storagedBooks.length) {
-        books.forEach(book => _createBook(book));
+        for (let i = 0 ; i< books.length ; i++) {
+            books[i] = {...books[i], thumbnail: `../assets/img/${i+1}.jpg`}
+            _createBook(books[i])
+        }
         utilService.saveToStorage(BOOK_KEY, books)
     }
 }

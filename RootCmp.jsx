@@ -1,10 +1,10 @@
 
-import { AboutUs } from "./cmps/AboutUs.jsx"
+import { AboutUs } from "./pages/AboutUs.jsx"
 import { AppHeader } from "./cmps/AppHeader.jsx"
-import { BookDetails } from "./cmps/BookDetails.jsx"
-import { BookIndex } from "./cmps/BookIndex.jsx"
-import { Home } from "./cmps/Home.jsx"
-import {BookEdit} from "./cmps/BookEdit.jsx"
+import { BookDetails } from "./pages/BookDetails.jsx"
+import { BookIndex } from "./pages/BookIndex.jsx"
+import { Home } from "./pages/Home.jsx"
+import {BookEdit} from "./pages/BookEdit.jsx"
 const Router = ReactRouterDOM.HashRouter
 const { Route, Routes } = ReactRouterDOM
 
