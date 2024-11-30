@@ -1,10 +1,9 @@
-const { useState, useEffect, useRef } = React
+const { useState, useEffect, useRef } = React;
 
 export function Home() {
-    return (
-        <section className="home">
-            <h2>Home Sweet Home</h2>
-       </section>
-    )
+	return (
+		<section className='home'>
+			<h2>Home Sweet Home</h2>
+		</section>
+	);
 }
-

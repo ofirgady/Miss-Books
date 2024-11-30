@@ -471,6 +471,10 @@ function query(filterBy = {}) {
                 books = books.filter(book => book.listPrice.amount <= filterBy.price)
             }
 
+            if (filterBy.onSale) {
+              books = books.filter(book => book.listPrice.isOnSale)
+            }
+
             return books
         })
 }
@@ -501,8 +505,8 @@ function getEmptyBook(title = '', description = '', thumbnail = '', listPrice = 
     return { title, description, thumbnail , listPrice }
 }
 
-function getDefaultFilter(filterBy = { title: '', price: 1000 }) {
-    return { title: filterBy.title, price: filterBy.price }
+function getDefaultFilter(filterBy = { title: '', price: 1000, onSale: false }) {
+    return { title: filterBy.title, price: filterBy.price, onSale: filterBy.onSale }
 }
 
 function _createBooks() {
