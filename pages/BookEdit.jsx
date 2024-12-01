@@ -1,17 +1,23 @@
 import { bookService } from "../services/book.service.js";
 
-const { useState, useEffect } = React;
+const { useState, useEffect, useRef } = React;
 const { useNavigate, useParams } = ReactRouterDOM;
 
 export function BookEdit() {
 	const [bookToEdit, setBookToEdit] = useState(bookService.getEmptyBook());
+	const [loading, setLoading] = useState(true);
+
 	const navigate = useNavigate();
 	const { bookId } = useParams();
+	const inputEl = useRef(null);
 
 	useEffect(() => {
 		if (bookId) {
 			loadBook();
 		}
+		setTimeout(() => {
+			setLoading(false);
+		}, 1000);
 	}, []);
 
 	function loadBook() {
@@ -26,6 +32,7 @@ export function BookEdit() {
 	function handleChange({ target }) {
 		let { value, name: field } = target;
 		let transformedValue;
+
 		switch (target.type) {
 			case "range":
 			case "number":
@@ -37,14 +44,20 @@ export function BookEdit() {
 			default:
 				transformedValue = value;
 		}
-		if (field === "listPrice") {
-			setBookToEdit((prevBook) => ({
-				...prevBook,
-				[field]: { ...listPrice, amount: transformedValue },
-			}));
-		} else {
-			setBookToEdit((prevBook) => ({ ...prevBook, [field]: transformedValue }));
-		}
+
+		setBookToEdit((prevBook) => {
+			if (field === "amount" || field === "isOnSale") {
+				return {
+					...prevBook,
+					listPrice: {
+						...prevBook.listPrice,
+						[field]: transformedValue,
+					},
+				};
+			} else {
+				return { ...prevBook, [field]: transformedValue };
+			}
+		});
 	}
 
 	function onSaveBook(ev) {
@@ -57,29 +70,97 @@ export function BookEdit() {
 			});
 	}
 
-	const { title, listPrice } = bookToEdit;
-	// const {amount, currencyCode, is} = listPrice
-	return (
-		<section className='car-edit'>
-			<h1>{bookId ? "Edit" : "Add"} Book</h1>
-			<form onSubmit={onSaveBook}>
-				<label htmlFor='title'>title</label>
-				<input
-					onChange={handleChange}
-					value={title}
-					type='text'
-					name='title'
-					id='title'
-				/>
+	const {
+		title,
+		listPrice = {},
+		subtitle,
+		publishedDate,
+		pageCount,
+	} = bookToEdit;
+	const { isOnSale = false, amount = 0 } = listPrice;
 
-				<label htmlFor='listPrice'>price</label>
-				<input
-					onChange={handleChange}
-					value={listPrice.amount}
-					type='number'
-					name='listPrice'
-					id='listPrice'
-				/>
+	if (loading)
+		return (
+			<div className='loading-container'>
+				<div className='loading'></div>
+			</div>
+		);
+	return (
+		<section className='book-edit'>
+			<h2>{bookId ? "Edit" : "Add"} Book</h2>
+			<form onSubmit={onSaveBook}>
+				<div className='book-edit-detail'>
+					<label htmlFor='title'>title</label>
+					<input
+						onChange={handleChange}
+						value={title}
+						type='text'
+						name='title'
+						id='title'
+						ref={inputEl}
+					/>
+				</div>
+				<div className='book-edit-detail'>
+					<label htmlFor='listPrice'>price</label>
+					<input
+						onChange={handleChange}
+						value={amount}
+						type='number'
+						name='listPrice'
+						id='listPrice'
+					/>
+				</div>
+				<div className='book-edit-detail'>
+					<label htmlFor='subtitle'>subtitle</label>
+					<input
+						onChange={handleChange}
+						value={subtitle}
+						type='text'
+						name='subtitle'
+						id='subtitle'
+					/>
+				</div>
+				<div className='book-edit-detail'>
+					<label htmlFor='subtitle'>subtitle</label>
+					<input
+						onChange={handleChange}
+						value={subtitle}
+						type='text'
+						name='subtitle'
+						id='subtitle'
+					/>
+				</div>
+				<div className='book-edit-detail'>
+					<label htmlFor='publishedDate'>Published Date</label>
+					<input
+						onChange={handleChange}
+						value={publishedDate}
+						type='number'
+						name='publishedDate'
+						id='publishedDate'
+					/>
+				</div>
+				<div className='book-edit-detail'>
+					<label htmlFor='pageCount'>Number of pages</label>
+					<input
+						onChange={handleChange}
+						value={pageCount}
+						type='number'
+						name='pageCount'
+						id='pageCount'
+					/>
+				</div>
+				<div className='book-edit-sale-detail'>
+					<label>Is the book on sale</label>
+					<input
+						onChange={handleChange}
+						checked={isOnSale}
+						type='checkbox'
+						name='isOnSale'
+						id='isOnSale'
+					/>
+				</div>
+
 				<button>Save</button>
 			</form>
 		</section>

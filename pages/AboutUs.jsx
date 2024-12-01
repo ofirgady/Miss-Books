@@ -4,10 +4,10 @@ export function AboutUs() {
 	return (
 		<div className='about-us-page'>
 			<header className='about-header'>
-				<h1>About Miss Books</h1>
+				<h2>About Miss Books</h2>
 			</header>
 			<section className='about-mission'>
-				<h2>Our Mission</h2>
+				<h3>Our Mission</h3>
 				<p>
 					At Miss Books, our mission is to connect people with the power of
 					books. We believe in the transformative magic of stories and
@@ -15,7 +15,7 @@ export function AboutUs() {
 				</p>
 			</section>
 			<section className='our-story'>
-				<h2>Our Story</h2>
+				<h3>Our Story</h3>
 				<p>
 					Founded in 2023, Miss Books began as a small local bookstore. Over the
 					years, we have grown into a thriving online bookstore while
@@ -27,7 +27,7 @@ export function AboutUs() {
 				</p>
 			</section>
 			<section className='team'>
-				<h2>Meet Our Team</h2>
+				<h3>Meet Our Team</h3>
 				<ul>
 					<li>
 						<strong>Ofir Gady</strong> - Founder & CEO
@@ -42,7 +42,7 @@ export function AboutUs() {
 			</section>
 			<footer className='about-footer'>
 				<p>
-					Have questions? <a href='/contact'>Contact us</a>. We'd love to hear
+					Have questions? Contact us! We'd love to hear
 					from you!
 				</p>
 				<p>

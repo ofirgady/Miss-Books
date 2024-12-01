@@ -15,11 +15,13 @@ export function BookPreview({ book, onRemoveBook }) {
 					)}
 					<div>
 						<h2>{book.title}</h2>
+					</div>
+					<div>
 						<h4>{book.subtitle}</h4>
 					</div>
 					<div>
 						<h3>Author: </h3>
-						{book.authors.map((author) => (
+						{book?.authors && book.authors.map((author) => (
 							<h4 key={book.id + author}>{author}</h4>
 						))}
 					</div>
@@ -37,6 +39,7 @@ export function BookPreview({ book, onRemoveBook }) {
 					</div>
 				</div>
 			</section>
+			
 			<img
 				src={book.thumbnail}
 				alt={book.title}

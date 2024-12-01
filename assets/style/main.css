@@ -37,7 +37,8 @@ h4,
 h5,
 h6,
 span,
-label {
+label,
+p {
 	margin: .5em 0 .5em;
 	font-family: 'Edu VIC WA NT Beginner', cursive;
 }
@@ -181,8 +182,13 @@ input:focus {
 
 /* Components */
 
-.home {
-	font-size: 1em;
+.home-page {
+	display: grid;
+	grid-template-columns: 1fr;
+	grid-template-rows: repeat(3, auto);
+	justify-items: center;
+	margin-top: 3rem;
+	gap: 2rem;
 }
 
 .app-header {
@@ -213,6 +219,20 @@ a.active {
 	text-decoration: underline;
 }
 
+.about-us-page {
+	display: grid;
+	margin-top: 1rem;
+	grid-template-columns: 1fr;
+	grid-template-rows: repeat(5, auto);
+}
+.about-us-page header {
+	place-self: center;
+}
+
+.about-us-page > section , .about-us-page > footer  {
+	padding: 2rem;
+}
+
 
 @media (max-width: 720px) {
 	.app-header {
@@ -233,7 +253,7 @@ a.active {
 .book-preview-container {
 	display: grid;
 	grid-template-columns: 1fr;
-	grid-template-rows: auto auto;
+	grid-template-rows: 350px auto;
 	grid-template-areas: 
 		"image"
 		"details";
@@ -250,7 +270,7 @@ a.active {
 .book-preview-container > img {
 	grid-area: image;
 	width: 300px;
-	height: 350px;
+	max-height: 350px;
 	align-self: stretch;
 	border-radius: 8px;
 }
@@ -265,19 +285,22 @@ a.active {
 .book-preview-details {
 	display: grid;
 	grid-template-columns: 1fr;
-	grid-template-rows: repeat(5, auto);
+	grid-template-rows: repeat(6, auto);
 	align-content: space-around;
+	justify-items: center;
+	justify-content: center;
 	height: 100%;
 }
 
 .book-preview-buttons {
-	grid-area: 5/1/5/-1;
+	grid-area: 6/1/6/-1;
 	align-self: end;
 	display: flex;
 	justify-content: space-around;
 }
 
 .book-is-on-sale {
+	
 	font-size: xx-large;
 	background-color: lightgoldenrodyellow;
 	place-self: center;
@@ -292,9 +315,9 @@ a.active {
 		"buttons buttons";
 	grid-template-rows: auto auto auto;
 	grid-template-columns: 1fr auto;
-	gap: 1rem;
+	gap: 3rem;
 	margin: 5rem auto;
-	width: 40%;
+	width: 70%;
 }
 
 .book-details-data {
@@ -303,7 +326,7 @@ a.active {
 
 .img-container {
 	grid-area: image;
-	text-align: center;
+	align-self: center;
 }
 
 .book-difficulity {
@@ -350,6 +373,53 @@ a.active {
 	border-radius: 9px;
 }
 
+/* book edit */
+
+.book-edit {
+	display: grid;
+	grid-template-rows: auto auto;
+	grid-template-columns: 1fr;
+	background-color: rgb(189, 202, 166);
+	border-radius: 20%;
+	justify-items: center;
+	justify-self: center;
+	margin-top: 5rem;
+	padding: 1rem;
+}
+
+.book-edit form {
+	display: grid;
+	padding: 1rem;
+	width: 500px;
+	grid-template-rows: repeat(8, auto);
+	grid-template-columns: 1fr;
+}
+
+
+.book-edit-detail {
+	width: 100%;
+	display: grid;
+	grid-template-rows: auto auto;
+	padding: 0.5rem;
+}
+
+.book-edit-sale-detail {
+	width: 100%;
+	display: flex;
+	justify-content: space-evenly;
+	padding: 0.5rem;
+}
+
+.book-edit form > button {
+	width: 10rem;
+	justify-self: center;
+}
+
+.book-edit-detail > label ,
+.book-edit-sale-detail > label {
+	font-size: x-large;
+}
+
 /* Media Queries */
 @media (max-width: 720px) {
 	.app-header {
@@ -364,9 +434,8 @@ a.active {
 
 	.book-details {
 		grid-template-areas: 
-			"image"
-			"data"
-			"buttons";
+			"data image"
+			"buttons buttons";
 		grid-template-columns: 1fr;
 	}
 
@@ -381,22 +450,22 @@ a.active {
 	position: fixed; /* Ensure it stays on the screen even during scrolling */
 	top: 0;
 	left: 0;
-	width: 100%; /* Full width */
-	height: 100%; /* Full height */
-	background-color: rgba(255, 255, 255, 0.8); /* Optional: Semi-transparent background */
+	width: 100%; 
+	height: 100%; 
+	background-color: rgb(255, 248, 234);
 	display: flex;
 	justify-content: center;
-	align-items: center; /* Center the spinner vertically and horizontally */
-	z-index: 9999; /* Keep it above all other content */
+	align-items: center;
+	z-index: 9999;
 }
 
 .loading {
-	width: 50px;
-	height: 50px;
+	width: 200px;
+	height: 200px;
 	border: 5px solid var(--gray2); /* Outer border color */
 	border-top: 5px solid var(--clr1); /* Inner rotating border color */
 	border-radius: 50%; /* Makes it a circle */
-	animation: spin 1s linear infinite; /* Animation for spinning */
+	animation: spin 1.5s linear infinite; /* Animation for spinning */
 }
 
 /* Keyframes for the spinning animation */
@@ -416,148 +485,3 @@ a.active {
 .low-price {
 	color: green;
 }
-
-
-
-/* older css version */
-
-
-/* book preview */
-/*  
-.book-preview-container {
-	background-color: rgb(223, 254, 245);
-	margin: 1rem;
-	display: grid;
-	grid-template-columns: auto auto;
-	max-width: 500px;
-	max-height: 500px;
-}
-
-.book-preview-container > img {
-	grid-area: 1/2/-1/3;
-	align-self: stretch;
-	max-height: inherit;
-	justify-self: end;
-}
-
-.book-preview-details {
-	grid-template-rows: repeat(7, auto);
-	display: grid;
-} */
-
-/* .book-preview-details :nth-child(1) {
-	justify-self: center;
-} */
-
-/* .book-preview-buttons {
-	grid-row:7/1/-1/1 ;
-	display: grid;
-	grid-template-columns: 1fr 1fr 1fr;
-	padding: 6px;
-} */
-
-/* book filter */
-/* 
-.book-filter {
-	border: solid;
-	border-color: rgb(139, 139, 139);
-	background-color: rgb(255, 244, 229);
-	border-radius: 20px;
-	grid-area: f;
-
-}
-
-.book-filter h2 {
-	place-self: center;
-}
-
-.book-filter-form {
-	display: grid;
-	grid-template-columns: repeat(3, 1fr);
-	align-items: center;
-	justify-items: center;
-	align-items: center;
-
-}
-
-.filter-input {
-	display: grid;
-	grid-template-rows: repeat(3, 1fr);
-	gap: 9px;
-} 
-
-.book-filter-form button {
-	height: 50%;
-	align-self: start;
-} */
-
-/* book details */
-/* 
-.book-details {
-	width: 80%;
-	margin-top: 2rem;
-	place-self: center;
-	display: grid;
-	grid-template-rows: 1fr auto;
-	grid-template-columns: auto 1fr;
-	gap: 2rem;
-	grid-template-areas: "d i" 
-						 "b b";
-
-}
-
-.book-details-data {
-	grid-row: 1/-1;
-	display: grid;
-	grid-template-rows: repeat(6, auto);
-	grid-template-columns: 1fr;
-	grid-area: d;
-}
-
-.img-container {
-	width: 300px;
-	grid-area: i;
-
-}
-
-.book-details-buttons {
-	display: grid;
-	grid-template-columns: repeat(3, 1fr);
-	grid-area: b;
-}  */
-
-/* book index */
-/* 
-.book-index {
-	display: grid;
-	grid-template-rows: repeat(2, auto);
-	grid-template-columns: repeat(2, auto);
-	grid-template-areas: "f b"
-						 "l l"
-} */
-/* 
-.book-list-container {
-	background-color: rgb(255, 255, 115);
-	grid-area: l;
-} */
-/* 
-.book-list {
-	display: grid;
-	grid-template-columns: repeat(4, 1fr);
-} */
-/* 
-.add-book-button {
-	background-color: rgb(98, 255, 192);
-	grid-area: b;
-	display: grid;
-	grid-template-columns: auto auto;
-	align-items: center;
-	justify-items: center;
-}
-
-.add-book-button button {
-	justify-self: start;
-	border-radius: 9px;
-}
-
- */
