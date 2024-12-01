@@ -5,6 +5,8 @@ export function BookPreview({ book, onRemoveBook }) {
 	function onRemoveBookHandler() {
 		onRemoveBook(book.id);
 	}
+
+	
 	return (
 		<div className='book-preview-container'>
 			<section className='book-preview'>
