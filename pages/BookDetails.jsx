@@ -66,13 +66,13 @@ export function BookDetails() {
 					<h2>Book's language:</h2>
 					<h1>{book.language}</h1>
 				</div>
-				<div className='book-detail'>
-					<h2>Reading Deficulty </h2>
-					{book.pageCount > 500 && <h3>Serious Reading</h3>}
+				<div className='book-difficulity'>
+					{/* <h2>Reading Deficulty </h2> */}
+					{book.pageCount > 500 && <h2 style={{backgroundColor: "lightcoral"}}>Serious Reading</h2>}
 					{book.pageCount < 500 && book.pageCount > 200 && (
-						<h3>Descent Reading</h3>
+						<h2 style={{backgroundColor: "yellow"}}>Descent Reading</h2>
 					)}
-					{book.pageCount < 200 && <h3>Light Reading</h3>}
+					{book.pageCount < 200 && <h2 style={{backgroundColor: "lightgreen"}}>Light Reading</h2>}
 				</div>
 				<div className='book-detail'>
 					<h2>New / Vintage: </h2>

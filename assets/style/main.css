@@ -27,6 +27,7 @@
 body {
 	margin: 0;
 	color: var(--gray3);
+	background-color: rgb(255, 243, 220);
 }
 
 h1,
@@ -287,14 +288,13 @@ a.active {
 .book-details {
 	display: grid;
 	grid-template-areas: 
-		"image"
-		"data"
-		"buttons";
+		"data image"
+		"buttons buttons";
 	grid-template-rows: auto auto auto;
-	grid-template-columns: 1fr;
+	grid-template-columns: 1fr auto;
 	gap: 1rem;
-	margin: 2rem auto;
-	width: 90%;
+	margin: 5rem auto;
+	width: 40%;
 }
 
 .book-details-data {
@@ -304,6 +304,10 @@ a.active {
 .img-container {
 	grid-area: image;
 	text-align: center;
+}
+
+.book-difficulity {
+	width:fit-content
 }
 
 .book-details-buttons {

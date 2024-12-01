@@ -2,8 +2,9 @@ const { useState, useEffect, useRef } = React;
 
 export function Home() {
 	return (
-		<section className='home'>
-			<h2>Home Sweet Home</h2>
-		</section>
+		<div className='home-page'>
+				<h1>Welcome to Miss Books</h1>
+				<p>Your favorite destination for books of all genres</p>
+		</div>
 	);
 }

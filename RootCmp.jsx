@@ -8,7 +8,9 @@ import {BookEdit} from "./pages/BookEdit.jsx"
 const Router = ReactRouterDOM.HashRouter
 const { Route, Routes } = ReactRouterDOM
 
+
 export function RootCmp() {
+
     return (
         <Router>
 
@@ -16,7 +18,7 @@ export function RootCmp() {
                 <AppHeader />
                     <main>
                     <Routes>
-                        <Route path="/" navigateTo={<Home />} />
+                        <Route path="/" element={<Home />} />
                         <Route path="/home" element={<Home />} />
                         <Route path="/about" element={<AboutUs />} />
                         <Route path="/book" element={<BookIndex />} />
