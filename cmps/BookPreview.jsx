@@ -21,7 +21,7 @@ export function BookPreview({ book, onRemoveBook }) {
 					</div>
 					<div>
 						<h3>Author: </h3>
-						{book?.authors && book.authors.map((author) => (
+						{book.authors && book.authors.map((author) => (
 							<h4 key={book.id + author}>{author}</h4>
 						))}
 					</div>
