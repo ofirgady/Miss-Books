@@ -1,7 +1,6 @@
 const { useState, useEffect, useRef } = React;
 const { Link } = ReactRouterDOM;
 export function BookPreview({ book, onRemoveBook }) {
-	console.log("the specific book from bookPreview" , book);
 	function onRemoveBookHandler() {
 		onRemoveBook(book.id);
 	}
