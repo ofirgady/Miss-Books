@@ -1,4 +1,3 @@
-const { useState, useEffect, useRef } = React;
 
 export function Home() {
 	return (

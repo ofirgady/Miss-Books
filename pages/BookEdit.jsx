@@ -1,6 +1,6 @@
 import { bookService } from "../services/book.service.js";
 
-const { useState, useEffect, useRef } = React;
+const { useState, useEffect } = React;
 const { useNavigate, useParams } = ReactRouterDOM;
 
 export function BookEdit() {
@@ -99,13 +99,13 @@ export function BookEdit() {
 					/>
 				</div>
 				<div className='book-edit-detail'>
-					<label htmlFor='listPrice'>price</label>
+					<label htmlFor='amount'>price</label>
 					<input
 						onChange={handleChange}
 						value={amount}
 						type='number'
-						name='listPrice'
-						id='listPrice'
+						name='amount'
+						id='amount'
 					/>
 				</div>
 				<div className='book-edit-detail'>

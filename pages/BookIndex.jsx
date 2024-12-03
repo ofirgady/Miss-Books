@@ -1,8 +1,8 @@
 import { bookService } from "../services/book.service.js";
 import { BookFilter } from "../cmps/BookFilter.jsx";
-import { BookList } from "../cmps/BookList.jsx";
-const { useState, useEffect, useRef } = React;
-const { useParams, useNavigate, Link } = ReactRouterDOM;
+import { BookList } from "../cmps/bookList.jsx";
+const { useState, useEffect } = React;
+const { Link } = ReactRouterDOM;
 
 export function BookIndex() {
 	const [books, setBooks] = useState(null);

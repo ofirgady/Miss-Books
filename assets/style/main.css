@@ -228,6 +228,16 @@ a.active {
 .about-us-page header {
 	place-self: center;
 }
+.about-us-nav {
+	display: flex;
+	justify-content: space-evenly;
+	font-size: xx-large;
+	font-family: 'Edu VIC WA NT Beginner', cursive;
+}
+
+.about-us-nav > a.active {
+	color: rgb(82, 88, 57);
+}
 
 .about-us-page > section , .about-us-page > footer  {
 	padding: 2rem;
@@ -255,57 +265,53 @@ a.active {
 	grid-template-columns: 1fr;
 	grid-template-rows: 350px auto;
 	grid-template-areas: 
-		"image"
-		"details";
+		"image image"
+		"details details";
 	margin: 1rem auto;
 	background-color: var(--clr1);
 	color: white;
 	border-radius: 10px;
 	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-	width: 300px;
 	
 }
 
 
-.book-preview-container > img {
+.book-preview-container img {
 	grid-area: image;
-	width: 300px;
+	width: 100%;
 	max-height: 350px;
 	align-self: stretch;
 	border-radius: 8px;
 }
 
-.book-preview {
-
-	grid-area: details;
-	display: grid;
-	align-items: start;
-	padding: 1rem;
-}
 .book-preview-details {
 	display: grid;
 	grid-template-columns: 1fr;
-	grid-template-rows: repeat(6, auto);
-	align-content: space-around;
+	grid-template-rows: repeat(5, auto);
+	align-content: space-evenly;
 	justify-items: center;
-	justify-content: center;
-	height: 100%;
+	padding: 1rem;
 }
 
+
 .book-preview-buttons {
-	grid-area: 6/1/6/-1;
+	grid-area: 5/1/6/-1;
 	align-self: end;
 	display: flex;
 	justify-content: space-around;
 }
 
 .book-is-on-sale {
-	
-	font-size: xx-large;
-	background-color: lightgoldenrodyellow;
-	place-self: center;
-	color: black;
+	font-size: x-large;
+	background-color: rgb(255, 43, 43);
+	padding: 1rem;
+	color: rgb(255, 255, 255);
+	grid-area: 1/1/2/2;
+	width: fit-content;
+	height: fit-content;
+	z-index: 9997;
 }
+
 
 /* Book Details */
 .book-details {
@@ -349,7 +355,7 @@ a.active {
 	border-radius: 10px;
 	margin: 1rem auto;
 	width: 100%;
-	max-width: 700px;
+	max-width: 600px;
 }
 
 .book-filter-form {

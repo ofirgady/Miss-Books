@@ -1,6 +1,6 @@
 import { bookService } from "../services/book.service.js";
 
-const { useState, useEffect, useRef } = React;
+const { useState, useEffect } = React;
 const { useParams, useNavigate, Link } = ReactRouterDOM;
 
 export function BookDetails() {
