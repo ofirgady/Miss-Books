@@ -48,7 +48,7 @@ function save(book) {
 		return storageService.put(BOOK_KEY, book);
 	} else {
 		const initialValues = {
-			thumbnail: `../assets/img/20.jpg`,
+			thumbnail: `http://coding-academy.org/books-photos/1.jpg`,
 			description: utilService.makeLorem(20),
 			authors: ["John Doe"],
 			publishedDate: new Date().getFullYear(),
