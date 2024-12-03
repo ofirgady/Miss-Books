@@ -1,4 +1,4 @@
-import { BookPreview } from "./BookPreview";
+import { BookPreview } from "./BookPreview.jsx";
 
 const { useState, useEffect, useRef } = React
 
