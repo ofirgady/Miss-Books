@@ -9,7 +9,6 @@ export function BookEdit() {
 
 	const navigate = useNavigate();
 	const { bookId } = useParams();
-	const inputEl = useRef(null);
 
 	useEffect(() => {
 		if (bookId) {
@@ -97,7 +96,6 @@ export function BookEdit() {
 						type='text'
 						name='title'
 						id='title'
-						ref={inputEl}
 					/>
 				</div>
 				<div className='book-edit-detail'>
