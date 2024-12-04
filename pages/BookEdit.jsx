@@ -75,6 +75,7 @@ export function BookEdit() {
 		subtitle,
 		publishedDate,
 		pageCount,
+		description,
 	} = bookToEdit;
 	const { isOnSale = false, amount = 0 } = listPrice;
 
@@ -95,7 +96,6 @@ export function BookEdit() {
 						value={title}
 						type='text'
 						name='title'
-						id='title'
 					/>
 				</div>
 				<div className='book-edit-detail'>
@@ -105,7 +105,6 @@ export function BookEdit() {
 						value={amount}
 						type='number'
 						name='amount'
-						id='amount'
 					/>
 				</div>
 				<div className='book-edit-detail'>
@@ -115,27 +114,24 @@ export function BookEdit() {
 						value={subtitle}
 						type='text'
 						name='subtitle'
-						id='subtitle'
 					/>
 				</div>
 				<div className='book-edit-detail'>
-					<label htmlFor='subtitle'>subtitle</label>
-					<input
+					<label htmlFor='descreption'>descreption</label>
+					<textarea
+						rows='5'
 						onChange={handleChange}
-						value={subtitle}
+						value={description}
 						type='text'
-						name='subtitle'
-						id='subtitle'
-					/>
+						name='descreption'></textarea>
 				</div>
 				<div className='book-edit-detail'>
-					<label htmlFor='publishedDate'>Published Date</label>
+					<label htmlFor='publishedDate'>Book Publish Year</label>
 					<input
 						onChange={handleChange}
 						value={publishedDate}
 						type='number'
 						name='publishedDate'
-						id='publishedDate'
 					/>
 				</div>
 				<div className='book-edit-detail'>
@@ -145,7 +141,6 @@ export function BookEdit() {
 						value={pageCount}
 						type='number'
 						name='pageCount'
-						id='pageCount'
 					/>
 				</div>
 				<div className='book-edit-sale-detail'>
@@ -155,7 +150,6 @@ export function BookEdit() {
 						checked={isOnSale}
 						type='checkbox'
 						name='isOnSale'
-						id='isOnSale'
 					/>
 				</div>
 

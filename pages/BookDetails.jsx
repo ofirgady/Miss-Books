@@ -1,5 +1,5 @@
 import { bookService } from "../services/book.service.js";
-
+import { LongText } from "../cmps/LongText.jsx"
 const { useState, useEffect } = React;
 const { useParams, useNavigate, Link } = ReactRouterDOM;
 
@@ -30,6 +30,19 @@ export function BookDetails() {
 		navigate("/book");
 	}
 
+	function authorsDisplayHandler(book) {
+		let bookAuthors = "";
+		if (book.authors.length === 1) {
+			bookAuthors = book.authors[0];
+		} else {
+			for (let i = 0; i < book.authors.length - 1; i++) {
+				bookAuthors += `${book.authors[i]},`;
+			}
+			bookAuthors += ` and ${bookAuthors[bookAuthors.length - 1]}`;
+		}
+		return bookAuthors;
+	}
+
 	if (!book)
 		return (
 			<div className='loading-container'>
@@ -52,15 +65,16 @@ export function BookDetails() {
 			<div className='book-details-data'>
 				<div className='book-detail'>
 					<h2>{book.title}</h2>
+					{book.authors && (
+						<h4 key={book.authors[0]}>{`By ${authorsDisplayHandler(
+							book
+						)}`}</h4>
+					)}
 					<h1>{book.subtitle}</h1>
-					<span>by </span>
-					{book.authors.map((author) => (
-						<span key={book.id + author}>{author}</span>
-					))}
 				</div>
 				<div className='book-detail'>
 					<h2>About the book: </h2>
-					<h1>{book.description}</h1>
+					{book.description && <LongText txt={book.description} length={50}/> }
 				</div>
 				<div className='book-detail'>
 					<h2>Book's language:</h2>

@@ -1,8 +1,8 @@
 const { useState, useEffect } = React;
 
-export function BookFilter({ defaultFilter, onSetFilter }) {
+export function BookFilter({ filterBy, onSetFilter }) {
 
-	const [filterByToEdit, setFilterByToEdit] = useState(defaultFilter);
+	const [filterByToEdit, setFilterByToEdit] = useState(filterBy);
 	const [tempPrice, setTempPrice] = useState(filterByToEdit.price); // Temporary state for the range slider
 
 
@@ -59,7 +59,6 @@ export function BookFilter({ defaultFilter, onSetFilter }) {
 						onChange={handleChange}
 						type='text'
 						name='title'
-						id='title'
 					/>
 				</div>
 
@@ -72,7 +71,6 @@ export function BookFilter({ defaultFilter, onSetFilter }) {
 						onChange={handleChange}
 						type='range'
 						name='price'
-						id='price'
 					/>
 					<span>{price}</span>
 				</div>
@@ -84,7 +82,6 @@ export function BookFilter({ defaultFilter, onSetFilter }) {
 						onChange={handleChange}
 						type='checkbox'
 						name='onSale'
-						id='onSale'
 					/>
 				</div>
 

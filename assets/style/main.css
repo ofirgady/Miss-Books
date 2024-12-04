@@ -278,7 +278,7 @@ a.active {
 
 .book-preview-container img {
 	grid-area: image;
-	width: 100%;
+	width: 300px;
 	max-height: 350px;
 	align-self: stretch;
 	border-radius: 8px;
@@ -292,6 +292,16 @@ a.active {
 	justify-items: center;
 	padding: 1rem;
 }
+
+.book-preview-detail {
+	display: flex;
+    justify-content: center; 
+    align-items: center; 
+    text-align: center; 
+    word-break: break-word; 
+    width: 250px;
+}
+
 
 
 .book-preview-buttons {
@@ -328,6 +338,12 @@ a.active {
 
 .book-details-data {
 	grid-area: data;
+}
+
+.book-detail > h2 {
+	background-color: rgb(202, 212, 185);
+	width: fit-content;
+	padding: 0.2rem;
 }
 
 .img-container {
@@ -490,4 +506,8 @@ a.active {
 
 .low-price {
 	color: green;
+}
+
+.long-text-container p {
+	font-size: large;
 }

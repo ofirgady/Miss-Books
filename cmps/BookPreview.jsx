@@ -4,7 +4,7 @@ export function BookPreview({ book, onRemoveBook }) {
 		onRemoveBook(book.id);
 	}
 
-	function bookAuthorsDisplayHandler(book) {
+	function authorsDisplayHandler(book) {
 		let bookAuthors = "";
 		if (book.authors.length === 1) {
 			bookAuthors = book.authors[0];
@@ -23,22 +23,22 @@ export function BookPreview({ book, onRemoveBook }) {
 					<h1 className='book-is-on-sale'>ON SALE!</h1>
 			)}
 			<div className='book-preview-details'>
-				<div>
+				<div className="book-preview-detail">
 					<h2>
 						{book.title} ({book.publishedDate})
 					</h2>
 				</div>
-				<div>
+				<div className="book-preview-detail">
 					{book.authors && (
-						<h4 key={book.authors[0]}>{`By ${bookAuthorsDisplayHandler(
+						<h4 key={book.authors[0]}>{`By ${authorsDisplayHandler(
 							book
 						)}`}</h4>
 					)}
 				</div>
-				<div>
+				<div className="book-preview-detail">
 					<h4>{book.subtitle}</h4>
 				</div>
-				<div>
+				<div className="book-preview-detail">
 					<h3>{`Price: ${book.listPrice.amount} ${book.listPrice.currencyCode}`}</h3>
 				</div>
 				<div className='book-preview-buttons'>

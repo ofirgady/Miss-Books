@@ -1,29 +1,29 @@
 const { useState, useEffect, useRef } = React;
 const { Link } = ReactRouterDOM;
 
-function LongText({ txt, length = 100 }) {
-	let isTextLonger = txt.length > length;
-	let shownTxt;
-	const [longTxtButtonPressed, setLongTxtButtonPressed] = useState(false);
+export function LongText({ txt, length = 100 }) {
+    const [longTxtButtonPressed, setLongTxtButtonPressed] = useState(false);
+    const isTextLonger = txt.length > length;
+    
+	function truncateText(text, maxLength) {
+        if (text.length <= maxLength) return text;
+        const truncated = text.substring(0, maxLength);
+        return truncated.substring(0, truncated.lastIndexOf(" ")) + "...";
+    }
 
-	if (isTextLonger) {
-		shownTxt = txt.slice(0, length - 1) + "...";
-	}
+    const shownTxt = isTextLonger && !longTxtButtonPressed
+        ? truncateText(txt, length)
+        : txt;
 
-	if (isTextLonger && !longTxtButtonPressed)
-		return (
-			<section className='long-text-container'>
-				<p>{shownTxt}</p>
-				<button onClick={() => setLongTxtButtonPressed(true)}>Read more</button>
-			</section>
-		);
 
-	return (
-		<section className='long-text-container'>
-			<p>{txt}</p>
-			{isTextLonger && longTxtButtonPressed && (
-				<a onClick={() => setLongTxtButtonPressed(false)}>read less</a>
-			)}
-		</section>
-	);
+    return (
+        <section className='long-text-container'>
+            <p>{shownTxt}</p>
+            {isTextLonger && (
+                <button onClick={() => setLongTxtButtonPressed(!longTxtButtonPressed)}>
+                    {longTxtButtonPressed ? "Read less" : "Read more"}
+                </button>
+            )}
+        </section>
+    );
 }

@@ -48,7 +48,7 @@ export function BookIndex() {
 			<section className='book-index'>
 				<BookFilter
 					onSetFilter={onSetFilter}
-					defaultFilter={filterBy}
+					filterBy={filterBy}
 				/>
 				<div className='add-book-button'>
 					<h3>You have another book to add?</h3>

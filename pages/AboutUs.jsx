@@ -1,6 +1,13 @@
-const { Outlet, Link, NavLink } = ReactRouterDOM;
+const { Outlet, Link, NavLink, useNavigate } = ReactRouterDOM;
+const { useEffect } = React;
 
 export function AboutUs() {
+
+	const navigate = useNavigate()
+	useEffect(() => {
+		navigate('/about/mission')
+	}, []);
+	
 	return (
 		<div className='about-us-page'>
 			<header className='about-header'>
