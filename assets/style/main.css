@@ -334,6 +334,9 @@ a.active {
 	gap: 3rem;
 	margin: 5rem auto;
 	width: 70%;
+	padding: 5rem;
+	background-color: rgb(242, 244, 237);
+	border-radius: 10%;
 }
 
 .book-details-data {
@@ -361,6 +364,14 @@ a.active {
 	justify-content: center;
 	gap: 1rem;
 	flex-wrap: wrap;
+}
+
+.book-detail-is-on-sale {
+	background-color: lightyellow !important;
+	color: black;
+	place-self: center;
+	font-size: xx-large;
+	padding: 1rem !important;
 }
 
 /* Book Filter */
@@ -402,7 +413,7 @@ a.active {
 	grid-template-rows: auto auto;
 	grid-template-columns: 1fr;
 	background-color: rgb(189, 202, 166);
-	border-radius: 20%;
+	border-radius: 10%;
 	justify-items: center;
 	justify-self: center;
 	margin-top: 5rem;

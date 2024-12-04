@@ -107,7 +107,7 @@ export function BookDetails() {
 				</div>
 				{book.listPrice.isOnSale && (
 					<div className='book-detail'>
-						<h2 className='book-is-on-sale'>ON SALE!</h2>
+						<h2 className='book-detail-is-on-sale'>ON SALE!</h2>
 					</div>
 				)}
 			</div>
