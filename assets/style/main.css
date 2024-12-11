@@ -522,3 +522,141 @@ a.active {
 .long-text-container p {
 	font-size: large;
 }
+
+.add-review {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	justify-items: center;
+}
+
+.add-review-form{
+	/* display: flex;
+	flex-direction: column;
+	gap: 1rem; */
+	grid-area: 1/1/-1/2;
+	width:100%;
+}
+
+.add-review-form h2 {
+	justify-self: center;
+}
+
+.add-review-form form {
+	display: flex;
+	flex-direction: column;
+	gap: 1rem;
+}
+
+.user-msg {
+    position: fixed;
+    top: 0.5rem;
+    right: 0.5rem;
+    display: flex;
+    flex-direction: column;
+    padding: 0.75rem 0.5rem 0rem;
+    margin: 0.5rem;
+    min-width: 100px;
+    max-width: 350px;
+    border-radius: 0.5rem;
+    background-color: #f1f1f1;
+    box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.1);
+    animation: slideIn 0.3s ease-in-out;
+    text-align: center;
+}
+
+.user-msg.success {
+    background-color: #d4edda;
+    color: #155724;
+}
+
+.user-msg.error {
+    background-color: #f8d7da;
+    color: #721c24;
+}
+
+.user-msg h4 {
+    margin-top: 0;
+    margin-bottom: 0.5rem;
+    padding-inline: 0.5rem;
+}
+
+.user-msg h4 > p {
+    margin: 0;
+}
+
+.user-msg button {
+    background-color: hsl(0 0% 100%/0.35);
+    border: none;
+    cursor: pointer;
+    font-size: 0.8rem;
+    width: fit-content;
+    aspect-ratio: 1;
+    align-self: end;
+    color: inherit;
+    border-radius: 50%;
+    margin-top: 0.5rem;
+    margin-right: 0;
+
+}
+
+.user-msg button:hover {
+    background-color: hsl(0 0% 100%/0.55);
+}
+
+.add-book {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 1rem;
+	background-color: rgba(255, 255, 255, 0.72);
+	position: relative; /* Make the section a positioning context */
+    padding: 20px; /* Add padding to ensure the button doesn't overlap content */
+    border: 1px solid #ccc; /* Optional: Styling for the section */
+    border-radius: 8px; /* Optional: Rounded corners */
+	
+}
+
+.add-book-close-button {
+    position: absolute; /* Position the button relative to the section */
+    top: 1px; /* Distance from the top edge of the section */
+    right: 1px; /* Distance from the right edge of the section */
+    background-color: transparent; /* Optional: Transparent background */
+    border: none; /* Remove border */
+    font-size: 20px; /* Adjust size of the button */
+    cursor: pointer; /* Change cursor to pointer on hover */
+}
+
+.add-book-close-button:hover {
+    background-color: transparent !important;
+	color: black !important; /* Optional: Change color on hover */
+}
+
+.add-book form {
+	width: 100%;
+	display: flex;
+	justify-content: space-evenly;
+}
+.add-book form input {
+	width: 70%;
+	height: 2rem;
+	border-radius: 8px;
+    border: 1px solid #ccc; /* Optional: Styling for the section */
+	padding: 1rem;
+}
+
+.add-book ul {
+	list-style-type: none;
+	text-align: center;
+}
+
+.add-book ul li {
+	display: flex;
+	justify-content: space-between;
+}
+
+.add-book ul button {
+	border-radius: 50% !important;
+	background-color: rgb(194, 196, 185);
+	margin-left: 1rem;
+}
+

@@ -1,5 +1,7 @@
 import { bookService } from "../services/book.service.js";
-import { LongText } from "../cmps/LongText.jsx"
+import { LongText } from "../cmps/LongText.jsx";
+import { AddReview } from "../cmps/AddReview.jsx";
+import { showErrorMsg } from "../services/event-bus.service.js";
 const { useState, useEffect } = React;
 const { useParams, useNavigate, Link } = ReactRouterDOM;
 
@@ -13,7 +15,7 @@ export function BookDetails() {
 
 	useEffect(() => {
 		loadBook();
-	}, [params.bookId]);
+	}, [params.bookId, book]);
 
 	function loadBook() {
 		bookService
@@ -43,6 +45,23 @@ export function BookDetails() {
 		return bookAuthors;
 	}
 
+	function removeReview(bookId, reviewId) {
+		bookService.removeReview(bookId, reviewId)
+	}
+
+	function SaveReview(ev) {
+		ev.preventDefault();
+		// Add review to the bookService and update local state
+		bookService
+			.addReview(book.id, review)
+			.then((review) => {
+                showSuccessMsg('review saved successfully')
+			})
+			.catch((err) => {
+				showErrorMsg("Failed to save review:", err);
+			});
+	}
+
 	if (!book)
 		return (
 			<div className='loading-container'>
@@ -61,71 +80,79 @@ export function BookDetails() {
 		}
 	}
 	return (
-		<section className='book-details'>
-			<div className='book-details-data'>
-				<div className='book-detail'>
-					<h2>{book.title}</h2>
-					{book.authors && (
-						<h4 key={book.authors[0]}>{`By ${authorsDisplayHandler(
-							book
-						)}`}</h4>
-					)}
-					<h1>{book.subtitle}</h1>
-				</div>
-				<div className='book-detail'>
-					<h2>About the book: </h2>
-					{book.description && <LongText txt={book.description} length={50}/> }
-				</div>
-				<div className='book-detail'>
-					<h2>Book's language:</h2>
-					<h1>{book.language}</h1>
-				</div>
-				<div className='book-difficulity'>
-					{book.pageCount > 500 && (
-						<h2 style={{ backgroundColor: "lightcoral" }}>Serious Reading</h2>
-					)}
-					{book.pageCount < 500 && book.pageCount > 200 && (
-						<h2 style={{ backgroundColor: "yellow" }}>Descent Reading</h2>
-					)}
-					{book.pageCount < 200 && (
-						<h2 style={{ backgroundColor: "lightgreen" }}>Light Reading</h2>
-					)}
-				</div>
-				<div className='book-detail'>
-					<h2>New / Vintage: </h2>
-					{currentYear - book.publishedDate > 10 ? (
-						<h3>Vintage</h3>
-					) : (
-						<h3>New</h3>
-					)}
-				</div>
-				<div className='book-detail'>
-					<h2>Price: </h2>
-					<h1 className={amountClass}>
-						{book.listPrice.amount} {book.listPrice.currencyCode}
-					</h1>
-				</div>
-				{book.listPrice.isOnSale && (
+		<section>
+			<section className='book-details'>
+				<div className='book-details-data'>
 					<div className='book-detail'>
-						<h2 className='book-detail-is-on-sale'>ON SALE!</h2>
+						<h2>{book.title}</h2>
+						{book.authors && (
+							<h4 key={book.authors[0]}>{`By ${authorsDisplayHandler(
+								book
+							)}`}</h4>
+						)}
+						<h1>{book.subtitle}</h1>
 					</div>
-				)}
-			</div>
-			<div className='img-container'>
-				<img
-					src={book.thumbnail}
-					alt={book.title}
-				/>
-			</div>
-			<div className='book-details-buttons'>
-				<button>
-					<Link to={`/book/${book.prevBookId}`}>Previous book</Link>
-				</button>
-				<button>
-					<Link to={`/book/${book.nextBookId}`}>Next book</Link>
-				</button>
-				<button onClick={onBack}>Back to the library</button>
-			</div>
+					<div className='book-detail'>
+						<h2>About the book: </h2>
+						{book.description && (
+							<LongText
+								txt={book.description}
+								length={50}
+							/>
+						)}
+					</div>
+					<div className='book-detail'>
+						<h2>Book's language:</h2>
+						<h1>{book.language}</h1>
+					</div>
+					<div className='book-difficulity'>
+						{book.pageCount > 500 && (
+							<h2 style={{ backgroundColor: "lightcoral" }}>Serious Reading</h2>
+						)}
+						{book.pageCount < 500 && book.pageCount > 200 && (
+							<h2 style={{ backgroundColor: "yellow" }}>Descent Reading</h2>
+						)}
+						{book.pageCount < 200 && (
+							<h2 style={{ backgroundColor: "lightgreen" }}>Light Reading</h2>
+						)}
+					</div>
+					<div className='book-detail'>
+						<h2>New / Vintage: </h2>
+						{currentYear - book.publishedDate > 10 ? (
+							<h3>Vintage</h3>
+						) : (
+							<h3>New</h3>
+						)}
+					</div>
+					<div className='book-detail'>
+						<h2>Price: </h2>
+						<h1 className={amountClass}>
+							{book.listPrice.amount} {book.listPrice.currencyCode}
+						</h1>
+					</div>
+					{book.listPrice.isOnSale && (
+						<div className='book-detail'>
+							<h2 className='book-detail-is-on-sale'>ON SALE!</h2>
+						</div>
+					)}
+				</div>
+				<div className='img-container'>
+					<img
+						src={book.thumbnail}
+						alt={book.title}
+					/>
+				</div>
+				<div className='book-details-buttons'>
+					<button>
+						<Link to={`/book/${book.prevBookId}`}>Previous book</Link>
+					</button>
+					<button>
+						<Link to={`/book/${book.nextBookId}`}>Next book</Link>
+					</button>
+					<button onClick={onBack}>Back to the library</button>
+				</div>
+			</section>
+			<AddReview SaveReview={SaveReview} removeReview={removeReview} book={book}/>
 		</section>
 	);
 }

@@ -3,6 +3,7 @@ import { storageService } from "./async-storage.service.js";
 
 const BOOK_KEY = "bookDB";
 _createBooks();
+const GOOGLE_BOOKS_API_URL = "https://www.googleapis.com/books/v1/volumes";
 
 export const bookService = {
 	query,
@@ -11,6 +12,10 @@ export const bookService = {
 	save,
 	getEmptyBook,
 	getDefaultFilter,
+	addReview,
+	queryGoogleBooks,
+	addGoogleBook,
+	removeReview,
 };
 
 // For Debug (easy access from console):
@@ -55,6 +60,7 @@ function save(book) {
 			pageCount: 100,
 			categories: ["General"],
 			language: "en",
+			reviews: [],
 		};
 		const newBook = { ...book, ...initialValues };
 		return storageService.post(BOOK_KEY, newBook);
@@ -71,7 +77,8 @@ function getEmptyBook(
 	categories = [],
 	thumbnail = "",
 	language = "en",
-	listPrice = { amount: 0, currencyCode: "USD", isOnSale: false }
+	listPrice = { amount: 0, currencyCode: "USD", isOnSale: false },
+	reviews = []
 ) {
 	return {
 		title,
@@ -84,6 +91,7 @@ function getEmptyBook(
 		thumbnail,
 		language,
 		listPrice,
+		reviews,
 	};
 }
 
@@ -95,6 +103,79 @@ function getDefaultFilter(
 		price: filterBy.price,
 		onSale: filterBy.onSale,
 	};
+}
+
+function addReview(bookId, review) {
+	return storageService.get(BOOK_KEY, bookId).then((book) => {
+		review.id = utilService.makeId();
+		book.reviews.unshift(review);
+		return save(book).then(() => review);
+	});
+}
+
+function removeReview(bookId, reviewId) {
+	return storageService.get(BOOK_KEY, bookId).then((book) => {
+		book.reviews = book.reviews.filter((review) => review.id !== reviewId);
+		return save(book);
+	});
+}
+
+async function queryGoogleBooks(searchValue) {
+	try {
+		const url = `${GOOGLE_BOOKS_API_URL}?q=${encodeURIComponent(searchValue)}`;
+		const response = await fetch(url);
+		if (!response.ok) {
+			throw new Error(`Failed to fetch books: ${response.statusText}`);
+		}
+		const data = await response.json();
+		return data || [];
+	} catch (error) {
+		console.error("Error fetching books from Google Books API:", error);
+		throw error; // Rethrow error to be handled by the caller
+	}
+}
+
+function _transformBook(item) {
+	const { id, volumeInfo } = item;
+	const {
+		title = "No Title", // Default value if title is missing
+		description = "No Description", // Default value if description is missing
+		authors = [], // Default to an empty array if authors is undefined
+		publishedDate = "Unknown",
+		pageCount = 0,
+		categories = [], // Default to an empty array if categories is undefined
+		imageLinks = {}, // Default to an empty object if imageLinks is undefined
+	} = volumeInfo;
+	return {
+		id,
+		title: title,
+		subtitle: "",
+		description: description,
+		authors: [...authors],
+		publishedDate: publishedDate,
+		pageCount: pageCount,
+		categories: [...categories],
+		thumbnail: imageLinks.thumbnail,
+		language: "en",
+		listPrice: {
+			amount: Math.floor(Math.random() * 1001),
+			currencyCode: "USD",
+			isOnSale: false,
+		},
+		reviews: [],
+	};
+}
+
+async function addGoogleBook(item) {
+	return storageService.query(BOOK_KEY).then((books) => {
+		const isBookExists = books.some(book => book.id === item.id);
+		if (isBookExists) {
+			throw Error('The book already exists in the Library')
+		} else {
+			const book = _transformBook(item);
+			return storageService.post(BOOK_KEY, book);
+		}
+	});
 }
 
 function _createBooks() {
@@ -123,6 +204,7 @@ function _createBooks() {
 					currencyCode: "USD",
 					isOnSale: Math.random() > 0.7,
 				},
+				reviews: [],
 			};
 			books.push(book);
 			_createBook(book);

@@ -1,5 +1,6 @@
 const { Link } = ReactRouterDOM;
 export function BookPreview({ book, onRemoveBook }) {
+
 	function onRemoveBookHandler() {
 		onRemoveBook(book.id);
 	}

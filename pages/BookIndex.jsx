@@ -1,8 +1,9 @@
 import { bookService } from "../services/book.service.js";
 import { BookFilter } from "../cmps/BookFilter.jsx";
 import { BookList } from "../cmps/BookList.jsx";
+import { showErrorMsg, showSuccessMsg } from "../services/event-bus.service.js";
 const { useState, useEffect } = React;
-const { Link } = ReactRouterDOM;
+const { Link, NavLink, Outlet } = ReactRouterDOM;
 
 export function BookIndex() {
 	const [books, setBooks] = useState(null);
@@ -10,14 +11,15 @@ export function BookIndex() {
 
 	useEffect(() => {
 		loadBooks();
-	}, [filterBy]);
+	}, [filterBy, books]);
 
-	function loadBooks() {
+	 function loadBooks() {
 		bookService
 			.query(filterBy)
 			.then(setBooks)
 			.catch((err) => {
 				console.log("Problems getting books:", err);
+				showErrorMsg("Problems getting books:", err);
 			});
 	}
 
@@ -26,9 +28,11 @@ export function BookIndex() {
 			.remove(bookId)
 			.then(() => {
 				setBooks((books) => books.filter((book) => book.id !== bookId));
+				showSuccessMsg('Book removed successfully')
 			})
 			.catch((err) => {
 				console.log("Problems removing book:", err);
+				showErrorMsg("Problems removing book")
 			});
 	}
 
@@ -53,9 +57,12 @@ export function BookIndex() {
 				<div className='add-book-button'>
 					<h3>You have another book to add?</h3>
 					<button>
-						<Link to='/book/edit'>Click Here!</Link>
+						<Link to='/book/bookAdd'>Click Here!</Link>
 					</button>
 				</div>
+				<section>
+					<Outlet books={books} />
+				</section>
 
 				{!books.length && <div>No books found...</div>}
 
