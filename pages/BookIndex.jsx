@@ -3,14 +3,18 @@ import { BookFilter } from "../cmps/BookFilter.jsx";
 import { BookList } from "../cmps/BookList.jsx";
 import { showErrorMsg, showSuccessMsg } from "../services/event-bus.service.js";
 const { useState, useEffect } = React;
-const { Link, NavLink, Outlet } = ReactRouterDOM;
+const { Link, NavLink, Outlet, useSearchParams } = ReactRouterDOM;
 
 export function BookIndex() {
+	const [searchParams, setSearchParams] = useSearchParams();
+	const defaultFilter = bookService.getFilterFromSearchParams(searchParams)
 	const [books, setBooks] = useState(null);
-	const [filterBy, setFilterBy] = useState(bookService.getDefaultFilter());
+	const [filterBy, setFilterBy] = useState(defaultFilter);
 
 	useEffect(() => {
-		loadBooks();
+		setSearchParams(filterBy)
+		loadBooks()
+
 	}, [filterBy, books]);
 
 	 function loadBooks() {
@@ -57,11 +61,11 @@ export function BookIndex() {
 				<div className='add-book-button'>
 					<h3>You have another book to add?</h3>
 					<button>
-						<Link to='/book/bookAdd'>Click Here!</Link>
+						<Link to='/book/add'>Click Here!</Link>
 					</button>
 				</div>
 				<section>
-					<Outlet books={books} />
+					<Outlet />
 				</section>
 
 				{!books.length && <div>No books found...</div>}

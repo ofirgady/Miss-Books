@@ -1,14 +1,17 @@
 import { bookService } from "../services/book.service.js";
 import { showErrorMsg } from "../services/event-bus.service.js";
+import { utilService } from "../services/util.service.js";
 
 const { useState, useEffect, useRef } = React;
 const { Link, useNavigate } = ReactRouterDOM;
 const cache = {};
 
-export function BookAdd({ books }) {
+export function BookAdd() {
 	const navigate = useNavigate();
 	const [searchValue, setSearchValue] = useState("");
 	const [results, setResults] = useState([]);
+
+	// const handleBookSearch = useRef(utilService.debounce(searchBooks, 2000))
 
 	function handleChange({ target }) {
 		setSearchValue(target.value);
@@ -29,15 +32,17 @@ export function BookAdd({ books }) {
 				searchBooks(searchValue);
 			}
 		}, 300); // Debounce for 300ms
-
+		console.log(results);
 		return () => clearTimeout(timeoutId); // Cleanup timeout on unmount
 	}, [searchValue]);
 
 	async function searchBooks(query) {
+	//async function searchBooks({target}) {
+	//send to service target.value
 		try {
-			const data = await bookService.queryGoogleBooks(query);
-			cache[query] = data.items; // Store result in the cache
-			setResults(data.items);
+			const items = await bookService.queryGoogleBooks(query);
+		
+			setResults(items);
 		} catch (err) {
 			console.error("Error fetching books:", err);
 		}
@@ -73,6 +78,7 @@ export function BookAdd({ books }) {
 					placeholder='Search for books...'
 					value={searchValue}
 					onChange={handleChange}
+					// onChange={handleBookSearch.current}
 				/>
 			</form>
 			<ul>

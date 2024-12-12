@@ -10,6 +10,7 @@ import { AboutTeam } from "./cmps/AboutCmps/AboutTeam.jsx"
 import { AboutStory } from "./cmps/AboutCmps/AboutStory.jsx"
 import { UserMsg } from "./cmps/UserMsg.jsx"
 import { BookAdd } from "./cmps/BookAdd.jsx"
+import { Dashboard } from "./pages/Dashboard.jsx"
 const Router = ReactRouterDOM.HashRouter
 const { Route, Routes } = ReactRouterDOM
 
@@ -30,8 +31,9 @@ export function RootCmp() {
                             <Route element={<AboutTeam />} path="/about/team" />
                             <Route element={<AboutStory />} path="/about/story" />
                         </Route>
+                        <Route element={<Dashboard />} path="/dashboard"/>
                         <Route path="/book" element={<BookIndex />} >
-                        <Route element={<BookAdd />} path="/book/bookAdd" />
+                        <Route element={<BookAdd />} path="/book/add" />
                         </Route>
                         <Route path="/book/:bookId" element={<BookDetails />} />
                         <Route path="/book/edit" element={<BookEdit />}/>

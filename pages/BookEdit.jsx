@@ -2,9 +2,10 @@ import { bookService } from "../services/book.service.js";
 import { showErrorMsg, showSuccessMsg } from "../services/event-bus.service.js";
 
 const { useState, useEffect } = React;
-const { useNavigate, useParams } = ReactRouterDOM;
+const { useNavigate, useParams, useSearchParams } = ReactRouterDOM;
 
 export function BookEdit() {
+	const [searchParams] =  useSearchParams()
 	const [bookToEdit, setBookToEdit] = useState(bookService.getEmptyBook());
 	const [loading, setLoading] = useState(true);
 
@@ -67,11 +68,15 @@ export function BookEdit() {
 			.save(bookToEdit)
 			.then(() => {
 				showSuccessMsg('Book saved successfully')
-				navigate("/book")
+				onBack()
 			})
 			.catch((err) => {
 				showErrorMsg("Cannot save!", err);
 			});
+	}
+
+	function onBack() {
+		navigate(searchParams.get('isDetails') ? `/book/${bookId}` : `/book`) 
 	}
 
 	const {
@@ -158,7 +163,8 @@ export function BookEdit() {
 					/>
 				</div>
 
-				<button>Save</button>
+				<button type="submit">Save</button>
+				<button onClick={onBack}>Cancel</button>
 			</form>
 		</section>
 	);

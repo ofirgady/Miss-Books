@@ -3,7 +3,7 @@ import { LongText } from "../cmps/LongText.jsx";
 import { AddReview } from "../cmps/AddReview.jsx";
 import { showErrorMsg } from "../services/event-bus.service.js";
 const { useState, useEffect } = React;
-const { useParams, useNavigate, Link } = ReactRouterDOM;
+const { useParams, useNavigate, Link,} = ReactRouterDOM;
 
 export function BookDetails() {
 	const [book, setBook] = useState(null);
@@ -149,10 +149,13 @@ export function BookDetails() {
 					<button>
 						<Link to={`/book/${book.nextBookId}`}>Next book</Link>
 					</button>
+					<button>
+						<Link to={`/book/edit/${book.id}?isDetails=true`}>Edit</Link>
+					</button>
 					<button onClick={onBack}>Back to the library</button>
 				</div>
 			</section>
-			<AddReview SaveReview={SaveReview} removeReview={removeReview} book={book}/>
+			<AddReview removeReview={removeReview} book={book}/>
 		</section>
 	);
 }
