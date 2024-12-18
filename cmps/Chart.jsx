@@ -10,7 +10,6 @@ export function Chart({ data }) {
 					>
 						{item.value + "%"}
 					</span>
-					<p className="chart-title">{item.title}</p>
 				</li>
 			))}
 		</ul>

@@ -10,7 +10,7 @@ import { AboutTeam } from "./cmps/AboutCmps/AboutTeam.jsx"
 import { AboutStory } from "./cmps/AboutCmps/AboutStory.jsx"
 import { UserMsg } from "./cmps/UserMsg.jsx"
 import { BookAdd } from "./cmps/BookAdd.jsx"
-import { Dashboard } from "./pages/Dashboard.jsx"
+import { Dashboard } from "./pages/DashBoard.jsx"
 const Router = ReactRouterDOM.HashRouter
 const { Route, Routes } = ReactRouterDOM
 
